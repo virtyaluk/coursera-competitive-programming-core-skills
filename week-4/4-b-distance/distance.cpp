@@ -30,23 +30,24 @@ int main() {
     // freopen("input.txt", "r", stdin);
     // freopen("output.txt", "w", stdout);
 
-    int n;
+    int n, lo = INT_MAX, hi = INT_MIN, loIdx = -1, hiIdx = -1;
     cin >> n;
 
-    vd first, second;
-    copy_n(istream_iterator<double>(cin), n, back_inserter(first));
-    copy_n(istream_iterator<double>(cin), n, back_inserter(second));
+    for (int i = 1; i <= n; i++) {
+        int p;
+        cin >> p;
 
-    double A = accumulate(first.begin(), first.end(), 0.0);
-    double B = accumulate(second.begin(), second.end(), 0.0);
-    double error = 1e-6;
+        if (p < lo) {
+            lo = p;
+            loIdx = i;
+        }
 
-    if (abs(A - B) < error) {
-        cout << "SUM(A)=SUM(B)" << endl;
-    } else if (A > B + error) {
-        cout << "SUM(A)>SUM(B)" << endl;
-    } else {
-        cout << "SUM(A)<SUM(B)" << endl;
+        if (p > hi) {
+            hi = p;
+            hiIdx = i;
+        }
+
+        cout << min(loIdx, hiIdx) << " " << max(loIdx, hiIdx) << endl;
     }
 
     return 0;

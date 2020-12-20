@@ -14,6 +14,7 @@ using namespace std;
 
 #define ar array
 #define ll long long
+#define lli long long int
 typedef vector<int> vi;
 typedef vector<float> vf;
 typedef vector<double> vd;
@@ -33,20 +34,31 @@ int main() {
     int n;
     cin >> n;
 
-    vd first, second;
-    copy_n(istream_iterator<double>(cin), n, back_inserter(first));
-    copy_n(istream_iterator<double>(cin), n, back_inserter(second));
+    lli max = 100007, right = 0;
+    lli s[max];
 
-    double A = accumulate(first.begin(), first.end(), 0.0);
-    double B = accumulate(second.begin(), second.end(), 0.0);
-    double error = 1e-6;
+    memset(s, 0, sizeof(s));
 
-    if (abs(A - B) < error) {
-        cout << "SUM(A)=SUM(B)" << endl;
-    } else if (A > B + error) {
-        cout << "SUM(A)>SUM(B)" << endl;
-    } else {
-        cout << "SUM(A)<SUM(B)" << endl;
+    while (n--) {
+        lli l, r;
+        cin >> l >> r;
+
+        s[l - 1]++;
+        s[r]--;
+
+        if (r > right) {
+            right = r;
+        }
+    }
+
+    for (lli i = 1; i <= right; i++) {
+        s[i] += s[i - 1];
+    }
+
+    for (lli i = 0; i <= right; i++) {
+        if (s[i]) {
+            cout << (i + 1) << " " << s[i] << endl;
+        }
     }
 
     return 0;

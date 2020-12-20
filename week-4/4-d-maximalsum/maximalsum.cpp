@@ -14,6 +14,7 @@ using namespace std;
 
 #define ar array
 #define ll long long
+#define lli long long int
 typedef vector<int> vi;
 typedef vector<float> vf;
 typedef vector<double> vd;
@@ -33,21 +34,34 @@ int main() {
     int n;
     cin >> n;
 
-    vd first, second;
-    copy_n(istream_iterator<double>(cin), n, back_inserter(first));
-    copy_n(istream_iterator<double>(cin), n, back_inserter(second));
+    vector<ll> A, ans, pref(n + 1), suf(n + 1);
 
-    double A = accumulate(first.begin(), first.end(), 0.0);
-    double B = accumulate(second.begin(), second.end(), 0.0);
-    double error = 1e-6;
+    copy_n(istream_iterator<ll>(cin), n, back_inserter(A));
 
-    if (abs(A - B) < error) {
-        cout << "SUM(A)=SUM(B)" << endl;
-    } else if (A > B + error) {
-        cout << "SUM(A)>SUM(B)" << endl;
-    } else {
-        cout << "SUM(A)<SUM(B)" << endl;
+    for (int i = 1; i <= n; i++) {
+        pref[i] = pref[i - 1] + A[i - 1];
     }
+
+    for (int i = n - 1; i >= 0; i--) {
+        suf[i] = suf[i + 1] + A[i];
+    }
+
+    lli sum = pref[n];
+
+    for (int i = 1; i <= n; i++) {
+        pref[i] = min(pref[i], pref[i - 1]);
+    }
+
+    for (int i = n - 1; i >= 0; i--) {
+        suf[i] = min(suf[i], suf[i + 1]);
+    }
+
+    for (int i = 0; i < n; i++) {
+        ans.push_back(sum - pref[i] - suf[i + 1]);
+    }
+
+    copy(ans.begin(), ans.end(), ostream_iterator<ll>(cout, " "));
+    cout << endl;
 
     return 0;
 }
