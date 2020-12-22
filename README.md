@@ -1,8 +1,9 @@
-[Competitive Programmer's Core Skills](https://www.coursera.org/learn/competitive-programming-core-skills/) by Saint Petersburg State University
+[Competitive Programmer's Core Skills](https://www.coursera.org/learn/competitive-programming-core-skills/) by Saint Petersburg State University - [Certificate](https://www.coursera.org/account/accomplishments/certificate/9K49WQBNUX83)
 
 ## :green_book: License
 
 Licensed under the [GPL-3.0 License](https://github.com/virtyaluk/coursera-competitive-programming-core-skills/blob/master/LICENSE).
+
 Copyright (c) 2020 Bohdan Shtepan
 
 ---
